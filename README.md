@@ -1,1 +1,0 @@
-# lekce8-ukol
