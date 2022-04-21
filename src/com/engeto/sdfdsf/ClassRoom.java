@@ -1,9 +1,12 @@
 package com.engeto.sdfdsf;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClassRoom {
+public class ClassRoom implements Interface{
     private final String hashtags = "###############################";
     private String name;
     private String year;
@@ -44,15 +47,18 @@ public class ClassRoom {
         return studentsList.size();
     }
 
-
+    @Override
     public void getStudentsList() {
         for (Student s : studentsList) {
             System.out.println(s.getStudentsInfo1());
         }
     }
-    public void addStudentsToList (Student student) {
-         studentsList.add(student);
+
+    @Override
+    public void addStudentToList(Student student) {
+        studentsList.add(student);
     }
+
     public String getClassInfo1 () {
         String classInfo = "\n"+"Třída: "+year+"."+name+" (ročník: "+year+")"+"\n"+
                 "Třídní učitel: "+classTeacher.getSurname()+", "+classTeacher.getName()+
@@ -71,6 +77,21 @@ public class ClassRoom {
             students+= "\n"+s.getStudentsInfo2();
         }
         return classInfo+students;
+    }
+    public String getClassInfo3 () {
+        String classInfo = "\n Třída: "+year+"."+name+"\n Třídní učitel: "+classTeacher.getFullName()+"\n Seznam žáků:";
+        String students = "";
+        for (Student s : studentsList) {
+            students+= "\n"+s.getStudentsInfo3();
+        }
+        return classInfo+students;
+    }
+    public void saveClassInfoToFile (String fileName) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(fileName))) {
+            writer.write(getClassInfo3());
+        } catch (IOException e) {
+            System.err.println(e.getLocalizedMessage());
+        }
     }
 }
 

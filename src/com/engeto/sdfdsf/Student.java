@@ -51,5 +51,7 @@ public class Student extends Teacher {
     public String getStudentsInfo2 () {
         return studentsId+", "+ getFullStudentsName();
     }
+    public String getStudentsInfo3 () {
+        return studentsNumber+". ID: "+studentsId+", jméno: "+getFullStudentsName()+", datum narození: "+dateOfBirth;}
 }
 
